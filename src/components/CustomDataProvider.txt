@@ -5,7 +5,7 @@ const apiUrl = 'http://localhost:9000';
 const httpClient = fetchUtils.fetchJson;
 
 export default {
-    getList: async (resource, params) => {
+    getList: (resource, params) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
@@ -15,12 +15,10 @@ export default {
         };
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-        const { headers, json } = await httpClient(url);
-        console.log(headers)
-        return ({
+        return httpClient(url).then(({ headers, json }) => ({
             data: json,
-            total: parseInt(headers.get('content-range').split('/').pop(), 10),
-        });
+            total: parseInt(headers.get('Content-Range').split('/').pop(), 10),
+        }));
     },
 
     getOne: (resource, params) =>
@@ -36,7 +34,7 @@ export default {
         return httpClient(url).then(({ json }) => ({ data: json }));
     },
 
-    getManyReference: async (resource, params) => {
+    getManyReference: (resource, params) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
@@ -49,11 +47,10 @@ export default {
         };
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-        const { headers, json } = await httpClient(url);
-        return ({
+        return httpClient(url).then(({ headers, json }) => ({
             data: json,
-            total: parseInt(headers.get('content-range').split('/').pop(), 10),
-        });
+            total: parseInt(headers.get('Content-Range').split('/').pop(), 10),
+        }));
     },
 
     update: (resource, params) =>

@@ -4,7 +4,7 @@ import {
     Datagrid,
     TextField,
     EditButton,
-    DeleteButton
+    DeleteWithConfirmButton
 } from 'react-admin'
 
 function ProductList(props) {
@@ -15,7 +15,7 @@ function ProductList(props) {
                 <TextField source='pname' label={'Products'} />
                 <TextField source='weight' />
                 <EditButton basePath='/products' />
-                <DeleteButton basePath='/products' />
+                <DeleteWithConfirmButton basePath='/products' />
             </Datagrid>
         </List>
     )

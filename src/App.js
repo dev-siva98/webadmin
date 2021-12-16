@@ -4,7 +4,6 @@ import restProvider from 'ra-data-simple-rest'
 import ProductList from "./components/ProductList";
 import AddProduct from "./components/AddProduct";
 import EditProduct from "./components/ProductEdit";
-// import CustomDataProvider from "./components/CustomDataProvider";
 
 function App() {
   return (
